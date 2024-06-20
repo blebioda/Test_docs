@@ -2024,108 +2024,108 @@ curl --location --globoff --request PATCH 'https://broker-api-demo.match-trader.
 - **updated**: `string (date-time)`
   - **REQUIRED**
   - Timestamps for when the account was last updated.
-- **email**: `string**
+- **email**: `string`
   - **REQUIRED**
   - Email address associated with the account.
 - **verificationStatus**: `string`
   - **REQUIRED**
   - Status of the account's verification.
   - **Enum values**: NEW, REJECTED, VERIFIED, BLOCKED, PENDING_VERIFICATION, UNVERIFIED
-- **type**: `string**
+- **type**: `string`
   - Account type, options are RETAIL, PROFESSIONAL, EXPERIENCED.
   - **Enum values**: RETAIL, PROFESSIONAL, EXPERIENCED
-- **personalDetails**: `object**
+- **personalDetails**: `object`
   - **REQUIRED**
   - **child attributes**:
-    - **firstname**: `string**
+    - **firstname**: `string`
       - First name of the account holder.
-    - **lastname**: `string**
+    - **lastname**: `string`
       - Last name of the account holder.
-    - **dateOfBirth**: `string (date)**
+    - **dateOfBirth**: `string (date)`
       - Birthdate of the account holder.
-    - **citizenship**: `string**
+    - **citizenship**: `string`
       - Citizenship of the account holder.
-    - **language**: `string**
+    - **language**: `string`
       - Preferred language of the account holder.
-    - **maritalStatus**: `string**
+    - **maritalStatus**: `string`
       - Marital status of the account holder.
-    - **passport**: `object**
+    - **passport**: `object`
       - Passport information.
       - **child attributes**:
-        - **number**: `string**
+        - **number**: `string`
           - Passport number.
-        - **country**: `string**
+        - **country**: `string`
           - Country of issuance.
-    - **taxIdentificationNumber**: `string**
-- **contactDetails**: `object**
+    - **taxIdentificationNumber**: `string`
+- **contactDetails**: `object`
   - **REQUIRED**
   - Contact information.
   - **child attributes**:
-    - **phoneNumber**: `string**
+    - **phoneNumber**: `string`
       - Phone number of the account holder.
-    - **faxNumber**: `string**
+    - **faxNumber**: `string`
       - Fax number.
-- **toContact**: `object**
+- **toContact**: `object`
   - Preferences about contacting the account holder.
   - **child attributes**:
-    - **toContactDate**: `string (date-time)**
+    - **toContactDate**: `string (date-time)`
       - Preferred date and time to contact.
-    - **alreadyContacted**: `boolean**
+    - **alreadyContacted**: `boolean`
       - **REQUIRED**
       - Required. Indicates if the account holder has been contacted previously.
-- **accountConfiguration**: `object**
+- **accountConfiguration**: `object`
   - **REQUIRED**
   - Configuration details for the account.
   - **child attributes**:
-    - **partnerId**: `integer (int64)**
+    - **partnerId**: `integer (int64)`
       - **REQUIRED**
       - Partner identifier associated with the account.
-    - **branchUuid**: `string (uuid)**
+    - **branchUuid**: `string (uuid)`
       - **REQUIRED**
       - Branch identifier where the account is managed.
-    - **roleUuid**: `string (uuid)**
+    - **roleUuid**: `string (uuid)`
       - Role identifier associated with the account.
-- **accountManager**: `object**
+- **accountManager**: `object`
   - Manager details.
   - **child attributes**:
-    - **uuid**: `string (uuid)**
+    - **uuid**: `string (uuid)`
       - Unique identifier for the account manager.
-    - **email**: `string**
+    - **email**: `string`
       - Email address of the account manager.
-    - **name**: `string**
+    - **name**: `string`
       - Name of the account manager.
-- **ibParentTradingAccountUuid**: `string (uuid)**
+- **ibParentTradingAccountUuid**: `string (uuid)`
   - Identifier for a parent IB trading account linked to the account.
-- **crmUserScope**: `object**
+- **crmUserScope**: `object`
   - CRM user's scope.
   - **child attributes**:
     - **branchScope**: `array**
       - Allow unique items: true
     - **managerPools**: `array**
       - Allow unique items: true
-    - **accountTypeContact**: `boolean**
-- **addressDetails**: `object**
+    - **accountTypeContact**: `boolean`
+- **addressDetails**: `object`
   - **REQUIRED**
   - **child attributes**:
     - **country**: `string`
       - Country location.
-    - **state**: `string`**`
+    - **state**: `string`
       - State or region.
-    - **city**: `string`**`
+    - **city**: `string`
       - City or locality.
-    - **postCode**: `string`**`
+    - **postCode**: `string`
       - Postal code.
-    - **address**: `string`**`
+    - **address**: `string`
       - Street address.
-- **bankingDetails**: `object`**`
+- **bankingDetails**: `object`
   - **REQUIRED**
   - Provides essential financial information for transactions.
   - **child attributes**:
-    - **bankAddress**: `string`**`
+    - **bankAddress**: `string`
       - Physical address of the bank.
-    - **bankSwiftCode**: `string`**`
+    - **bankSwiftCode**: `string`
       - SWIFT code for international banking.
-    - **bankAccount**: `string`**`
+    - **bankAccount**: `string`
       - Bank account number.
     - **bankName**: `string`
       - Name of the bank.
@@ -2137,7 +2137,7 @@ curl --location --globoff --request PATCH 'https://broker-api-demo.match-trader.
   - **child attributes**:
     - **statusUuid**: `string (uuid)`
       - Unique ID for the lead's status.
-    - **source**: `string**
+    - **source**: `string`
       - Origin of the lead.
     - **providerUuid**: `string (uuid)`
       - ID of the lead provider.
@@ -2173,7 +2173,7 @@ No content
 
 - **accountUuid**: `string (uuid)`
   - **REQUIRED**
-- **newPassword**: `string**
+- **newPassword**: `string`
   - **REQUIRED**
 
 #### Responses
