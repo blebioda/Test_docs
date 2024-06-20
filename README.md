@@ -350,20 +350,20 @@ In this section, you can find examples of error responses for each status code. 
 
 In our system, there is a distinction between multiple layers of account attributes. In general, the account operates within the frames of a given: Branch, Offer(s), and Role. Each section has an explanation of a particular layer.
 
-Via our API, you cannot edit Branches, Offers, and Roles configuration (it can be done only by using our CRM), but it's important to know them since you will need them to efficiently manage accounts created in the system. That's why we share GET endpoints, where you can check Branches, Offers, and Roles available in your setup.
+Via our API, you cannot edit Branches, Offers, and Roles configuration (it can be done only by using our CRM), but it's important to know them since you will need them to efficiently manage accounts created in the system. That's why we share  endpoints, where you can check Branches, Offers, and Roles available in your setup.
 
-## Get Branches
+##  Branches
 
 Branch represents the geographical or organizational division where the user operates. On the broker's end, it is usually connected to a specific area of responsibility or jurisdiction within the company's structure. This does not have to be fixed and the division can be freely shaped, depending on the business needs. The only requirement is that every account must have a branch assigned, even if there is one branch instance in the system.
 
-### GET /v1/branches?from=&to=&sort=
+#### GET /v1/branches?from=&to=&sort=
 ```sh
 curl --location 'https://broker-api-demo.match-trader.com/v1/branches' \
 --header 'Authorization: Provide your token here' \
 --header 'Content-Type: application/json'
 ```
 
-### Response
+#### Response
 ```json
 {
   "branches": [
