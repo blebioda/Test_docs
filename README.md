@@ -346,24 +346,24 @@ In this section, you can find examples of error responses for each status code. 
   "timestamp": "2023-06-19T12:34:56Z"
 }
 ```
-## Branches, Offers, Roles
+# Branches, Offers, Roles
 
 In our system, there is a distinction between multiple layers of account attributes. In general, the account operates within the frames of a given: Branch, Offer(s), and Role. Each section has an explanation of a particular layer.
 
-Via our API, you cannot edit Branches, Offers, and Roles configuration (it can be done only by using our CRM), but it's important to know them since you will need them to efficiently manage accounts created in the system. That's why we share  endpoints, where you can check Branches, Offers, and Roles available in your setup.
+Via our API, you cannot edit Branches, Offers, and Roles configuration (it can be done only by using our CRM), but it's important to know them since you will need them to efficiently manage accounts created in the system. That's why we share GET endpoints, where you can check Branches, Offers, and Roles available in your setup.
 
-##  Branches
+## Get Branches
 
 Branch represents the geographical or organizational division where the user operates. On the broker's end, it is usually connected to a specific area of responsibility or jurisdiction within the company's structure. This does not have to be fixed and the division can be freely shaped, depending on the business needs. The only requirement is that every account must have a branch assigned, even if there is one branch instance in the system.
 
-#### GET /v1/branches?from=&to=&sort=
+### GET /v1/branches?from=&to=&sort=
 ```sh
 curl --location 'https://broker-api-demo.match-trader.com/v1/branches' \
 --header 'Authorization: Provide your token here' \
 --header 'Content-Type: application/json'
 ```
 
-#### Response
+### Response
 ```json
 {
   "branches": [
@@ -644,7 +644,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/roles' \
       - The Role's name.
 
 
-## Accounts
+# Accounts
 
 In the Accounts section, you will find detailed information about user accounts within the system. With this, you can access and update account details and create new accounts. This section serves as a central hub for overseeing and administering user accounts within the system. You can also find a Trading Accounts sub-section within the section with all relevant endpoints to manage Trading Accounts.
 
@@ -652,7 +652,7 @@ An Account represents the user, and a Trading Account is needed to perform tradi
 
 In our system, there is a distinction between Leads and Clients. They are both types of user accounts. The difference between Lead and Client is conversion (first deposit) - the user is a Lead by default and becomes a Client after the first successful deposit.
 
-### Get Accounts
+## Get Accounts
 
 With the Get Accounts endpoint, you can retrieve detailed information about all accounts within the system.
 
@@ -899,7 +899,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/accounts?accountTyp
     - **size**: `integer (int32)`
       - Number of records included in one page.
 
-### Get Account by Email
+## Get Account by Email
 
 With the Get Account by Email endpoint, you can retrieve detailed information about a particular Account in the system using the user's email.
 
@@ -1106,7 +1106,7 @@ curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/accounts/
     - **becomeActiveClientTime**: `string (date-time)`
       - The date and time when the lead became an active client.
 
-### Get Account by UUID
+## Get Account by UUID
 
 With the Get Account by UUID endpoint, you can retrieve detailed information about a particular Account in the system using the Account's UUID.
 
@@ -1319,7 +1319,7 @@ curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/accounts/
     - **becomeActiveClientTime**: `string (date-time)`
       - The date and time when the lead became an active client.
 
-### Get Account's Timeline Events
+## Get Account's Timeline Events
 
 With Get Account's Timeline Events endpoint, you can retrieve detailed information about events associated with a specific account. Users can access a timeline of events, including details, creators, and creation timestamps, providing valuable insights into account activities.
 
@@ -1386,7 +1386,7 @@ curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/accounts/
     - **created**: `string (date-time)`
       - Time at which the Event was created.
 
-### Create Account
+## Create Account
 
 In this section, you can find the endpoint for creating new Accounts in the system.
 
@@ -1777,7 +1777,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/accounts' \
     - **becomeActiveClientTime**: `string (date-time)`
       - Expected time for lead conversion to active client.
 
-### Update Account Info
+## Update Account Info
 
 With this endpoint, you can update and modify Account details.
 
@@ -1837,7 +1837,7 @@ curl --location --globoff --request PATCH 'https://broker-api-demo.match-trader.
 }'
 ```
 
-###
+#### Response
 `200`
 ```json
 {
@@ -2107,44 +2107,44 @@ curl --location --globoff --request PATCH 'https://broker-api-demo.match-trader.
 - **addressDetails**: `object**
   - **REQUIRED**
   - **child attributes**:
-    - **country**: `string**
+    - **country**: `string`
       - Country location.
-    - **state**: `string**
+    - **state**: `string`**`
       - State or region.
-    - **city**: `string**
+    - **city**: `string`**`
       - City or locality.
-    - **postCode**: `string**
+    - **postCode**: `string`**`
       - Postal code.
-    - **address**: `string**
+    - **address**: `string`**`
       - Street address.
-- **bankingDetails**: `object**
+- **bankingDetails**: `object`**`
   - **REQUIRED**
   - Provides essential financial information for transactions.
   - **child attributes**:
-    - **bankAddress**: `string**
+    - **bankAddress**: `string`**`
       - Physical address of the bank.
-    - **bankSwiftCode**: `string**
+    - **bankSwiftCode**: `string`**`
       - SWIFT code for international banking.
-    - **bankAccount**: `string**
+    - **bankAccount**: `string`**`
       - Bank account number.
-    - **bankName**: `string**
+    - **bankName**: `string`
       - Name of the bank.
-    - **accountName**: `string**
+    - **accountName**: `string`
       - Name associated with the bank account.
-- **leadDetails**: `object**
+- **leadDetails**: `object`
   - **REQUIRED**
   - Details for tracking and managing leads.
   - **child attributes**:
-    - **statusUuid**: `string (uuid)**
+    - **statusUuid**: `string (uuid)`
       - Unique ID for the lead's status.
     - **source**: `string**
       - Origin of the lead.
-    - **providerUuid**: `string (uuid)**
+    - **providerUuid**: `string (uuid)`
       - ID of the lead provider.
-    - **becomeActiveClientTime**: `string (date-time)**
+    - **becomeActiveClientTime**: `string (date-time)`
       - Expected time for lead conversion to active client.
 
-### Change Account's Password
+## Change Account's Password
 
 Using this endpoint, you can change the Account's password.
 
@@ -2181,9 +2181,9 @@ No content
 ##### 204 No Content
 
 
-## Trading Accounts
+# Trading Accounts
 
-### Get Trading Accounts
+## Get Trading Accounts
 
 With the Get Accounts endpoint, you can retrieve detailed information about all Trading Accounts within the system.
 
@@ -2309,7 +2309,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts' \
 - **size**: `integer (int32)`
   - Number of records per page.
 
-### Get Trading Account by login
+## Get Trading Account by login
 
 With the Get Trading Account by login endpoint, you can retrieve detailed information about a particular Trading Account in the system using the Trading Account's login.
 
@@ -2406,7 +2406,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/trading-account?sys
     - **currencyPrecision**: `integer (int32)`
       - Trading Account's Currency precision.
 
-### Create New Trading Account
+## Create New Trading Account
 
 In this section, you can find the endpoint for creating new Trading Accounts in the system.
 
@@ -2480,7 +2480,7 @@ curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/accounts/
   - The commission structure identifier associated with the trading account.
 
 
-## Payments
+# Payments
 
 In the Payments section you can find endpoints for:
 
@@ -2489,7 +2489,7 @@ In the Payments section you can find endpoints for:
 - Making Manual payments
 - Credit in and out
 
-### Get Payment Gateways
+## Get Payment Gateways
 
 A Payment Gateway is a resource responsible for all payment operations in the system. All Deposits and Withdrawals are processed within the frame of a Payment Gateway and following the Payment Gateway configuration.
 
@@ -2593,7 +2593,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/payment-gateways' \
             - **verificationRequired**: `boolean`
               - Specifies if verification is required for processing transactions.
 
-### Get Deposits
+## Get Deposits
 
 With this endpoint, you can retrieve information about deposits made in the system. You can also request deposits for a specific account using query.
 
@@ -2782,7 +2782,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/deposits' \
 - **size**: `integer (int32)`
   - Number of records per page.
 
-### Get Withdrawals
+## Get Withdrawals
 
 With this endpoint, you can retrieve information about withdrawals made in the system. You can also request withdrawals for a specific account using query.
 
@@ -2905,7 +2905,7 @@ With this endpoint, you can retrieve information about withdrawals made in the s
 - **size**: `integer (int32)`
   - Number of records per page.
 
-### Manual Deposit
+## Manual Deposit
 
 Using this endpoint, you can deposit funds to a Trading Account.
 
@@ -2990,7 +2990,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/deposits/manual' \
     - **currency**: `string`
       - Currency in which the deposit was made.
 
-### Manual Withdrawal
+## Manual Withdrawal
 
 Using this endpoint, you can withdraw funds from a Trading Account.
 
@@ -3066,7 +3066,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/withdrawals/manual'
     - **netAmount**: `number`
     - **currency**: `string`
 
-### Credit In
+## Credit In
 
 Using this endpoint, you can add a credit to a Trading Account.
 
@@ -3109,7 +3109,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/credit/in' \
 
 ##### 204 No Content
 
-### Credit Out
+## Credit Out
 
 Using this endpoint, you can remove a credit from a Trading Account.
 
@@ -3153,11 +3153,11 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/credit/out' \
 ##### 204 No Content
 
 
-## Trading
+# Trading
 
 The Trading section allows accessing and managing various trading functionalities within the system. With this section, you can place orders and monitor trading activity seamlessly. This section provides the necessary tools for users to efficiently execute trades and stay informed about market conditions.
 
-### Get Symbols
+## Get Symbols
 
 Using this endpoint, you can retrieve information about various symbols (instruments) within the system, including details such as symbol names, currency, trading hours, and more.
 
@@ -3325,7 +3325,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/symbols?systemUuid=
     - **sessionOpen**: `boolean`
       - Reflects whether the session for the symbol is open.
 
-### Open Position
+## Open Position
 
 Using this endpoint, you can open a Position for a specific Trading Account.
 
@@ -3394,7 +3394,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/po
 - **orderId**: `string`
   - A unique identifier for the order associated with the opened position.
 
-### Edit Position
+## Edit Position
 
 You can edit (Stop Loss and Take Profit values) an already opened Position for a specific Trading Account using this endpoint.
 
@@ -3453,7 +3453,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/po
 - **orderId**: `string`
   - A unique identifier for the order associated with the edited position.
 
-### Close Position
+## Close Position
 
 You can close a Position for a specific Trading Account using this endpoint. It is also possible to close multiple positions with one request.
 
@@ -3518,11 +3518,11 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/po
   - A unique identifier for the transaction or order associated with the closure of the positions.
 
 
-## Trading Data
+# Trading Data
 
 The Trading Data section includes endpoints to retrieve Open and Closed Positions, Active Orders, and Ledgers. There is also a “Candles” sub-section, where you can find an endpoint to retrieve Candles data for a specific instrument.
 
-### Get Open Positions
+## Get Open Positions
 
 With this endpoint, you can retrieve all open positions for a specific trading account.
 
@@ -3656,7 +3656,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/tr
         - **commission**: `number`
           - The commission fees associated with the position.
 
-### Get Closed Positions
+## Get Closed Positions
 
 With this endpoint, you can retrieve all closed positions for a specific trading account.
 
@@ -3753,7 +3753,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/tr
     - **closingOrderID**: `string`
       - Identifier for the order that closed the position.
 
-### Get Active Orders
+## Get Active Orders
 
 With this endpoint, you can retrieve all Active Orders for a specific Trading Account.
 
@@ -3833,7 +3833,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/tr
     - **comment**: `string`
       - A comment or note associated with the order.
 
-### Get Ledgers
+## Get Ledgers
 
 With this endpoint, you can retrieve all Ledgers for a specific Trading Account.
 
@@ -3903,7 +3903,7 @@ curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/trading-a
     - **comment**: `string`
       - A comment or description provided for the transaction.
 
-### Get Candles
+## Get Candles
 
 Get Candles endpoint allows you to retrieve candle data for a specific symbol and time interval. You will access information on the opening, high, low, and closing prices of candles within the specified time frame.
 
