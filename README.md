@@ -598,6 +598,7 @@ curl --location 'https://broker-api-demo.match-trader.com/v1/roles' \
 --header 'Content-Type: application/json'
 ```
 ### Response
+`200`
 ```json
 {
   "roles": [
@@ -656,6 +657,96 @@ In our system, there is a distinction between Leads and Clients. They are both t
 With the Get Accounts endpoint, you can retrieve detailed information about all accounts within the system.
 
 Since the response is paged, please make sure you are making a valid request. The default request's response (without providing a proper query param) is set to 10 records.
+
+### GET /v1/accounts?query=&page=&size=&sort=&from=&to=&accountType=ALL
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/accounts?accountType=ALL' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response 
+`200`
+```json
+{
+  "content": [
+    {
+      "uuid": "0044eb05-6964-40e1-a920-c6a3e8258569",
+      "created": "2024-04-05T13:37:54.014Z",
+      "updated": "2024-04-05T13:37:54.014Z",
+      "email": "integration-demo@match-trade.com",
+      "verificationStatus": "NEW",
+      "type": "RETAIL",
+      "personalDetails": {
+        "firstname": "Demo",
+        "lastname": "Integration Account",
+        "dateOfBirth": "2000-01-01",
+        "citizenship": "US",
+        "language": "en",
+        "maritalStatus": "Married",
+        "passport": {
+          "number": "123-456-789",
+          "country": "USA"
+        },
+        "taxIdentificationNumber": "Sample TIN"
+      },
+      "contactDetails": {
+        "phoneNumber": "+1111111111",
+        "faxNumber": "+1111111111",
+        "toContact": {
+          "toContactDate": null,
+          "alreadyContacted": false
+        }
+      },
+      "accountConfiguration": {
+        "partnerId": null,
+        "branchUuid": "d3318c30-8c90-4018-ac25-fe2d8444d77e",
+        "roleUuid": "1e7c3cc4-0780-4dcf-850e-b9b444bcc561",
+        "accountManager": {
+          "uuid": "21913fc9-1851-4ab4-a862-5230ad1f53ae",
+          "email": "conversion@roles.test",
+          "name": null
+        },
+        "ibParentTradingAccountUuid": "44edfdc6-bb7e-464a-844d-d82ffefb9e24",
+        "crmUserScope": {
+          "branchScope": [
+            ""
+          ],
+          "managerPools": [
+            ""
+          ]
+        },
+        "accountTypeContact": false
+      },
+      "addressDetails": {
+        "country": "US",
+        "state": "New York",
+        "city": "New York",
+        "postCode": "NY 10005",
+        "address": "11 Wall St"
+      },
+      "bankingDetails": {
+        "bankAddress": "Sample Bank Address",
+        "bankSwiftCode": "Sample SWIFT Code",
+        "bankAccount": "Sample Bank Account",
+        "bankName": "Sample Bank Name",
+        "accountName": "Sample Account Name"
+      },
+      "leadDetails": {
+        "statusUuid": "77092554-9ab3-44ab-a5c9-49fcc7c459fa",
+        "source": "Client Referral",
+        "providerUuid": null,
+        "becomeActiveClientTime": "2024-04-05T13:37:53.953Z"
+      }
+    },
+    "test"
+  ],
+  "totalPages": 1,
+  "totalElements": null,
+  "number": null,
+  "size": 1
+}
+```
 
 #### Header Parameters
 
@@ -812,6 +903,87 @@ Since the response is paged, please make sure you are making a valid request. Th
 
 With the Get Account by Email endpoint, you can retrieve detailed information about a particular Account in the system using the user's email.
 
+### GET /v1/accounts/by-email/{email}
+```sh
+curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/accounts/by-email/{email}' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "uuid": "",
+  "created": "",
+  "updated": "",
+  "email": "",
+  "verificationStatus": "NEW",
+  "type": "RETAIL",
+  "personalDetails": {
+    "firstname": "",
+    "lastname": "",
+    "dateOfBirth": "",
+    "citizenship": "",
+    "language": "",
+    "maritalStatus": "",
+    "passport": {
+      "number": "",
+      "country": ""
+    },
+    "taxIdentificationNumber": ""
+  },
+  "contactDetails": {
+    "phoneNumber": "",
+    "faxNumber": "",
+    "toContact": {
+      "toContactDate": "",
+      "alreadyContacted": false
+    }
+  },
+  "accountConfiguration": {
+    "partnerId": null,
+    "branchUuid": "",
+    "roleUuid": "",
+    "accountManager": {
+      "uuid": "",
+      "email": "",
+      "name": ""
+    },
+    "ibParentTradingAccountUuid": "",
+    "crmUserScope": {
+      "branchScope": [
+        ""
+      ],
+      "managerPools": [
+        ""
+      ]
+    },
+    "accountTypeContact": false
+  },
+  "addressDetails": {
+    "country": "",
+    "state": "",
+    "city": "",
+    "postCode": "",
+    "address": ""
+  },
+  "bankingDetails": {
+    "bankAddress": "",
+    "bankSwiftCode": "",
+    "bankAccount": "",
+    "bankName": "",
+    "accountName": ""
+  },
+  "leadDetails": {
+    "statusUuid": "",
+    "source": "",
+    "providerUuid": "",
+    "becomeActiveClientTime": ""
+  }
+}
+```
+
 #### Header Parameters
 
 - **Authorization**: `string`
@@ -937,6 +1109,86 @@ With the Get Account by Email endpoint, you can retrieve detailed information ab
 ### Get Account by UUID
 
 With the Get Account by UUID endpoint, you can retrieve detailed information about a particular Account in the system using the Account's UUID.
+
+### GET /v1/accounts/by-uuid/{accountUuid}
+```sh
+curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/accounts/by-uuid/{accountUuid}' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+### Response
+`200`
+```json
+{
+  "uuid": "",
+  "created": "",
+  "updated": "",
+  "email": "",
+  "verificationStatus": "NEW",
+  "type": "RETAIL",
+  "personalDetails": {
+    "firstname": "",
+    "lastname": "",
+    "dateOfBirth": "",
+    "citizenship": "",
+    "language": "",
+    "maritalStatus": "",
+    "passport": {
+      "number": "",
+      "country": ""
+    },
+    "taxIdentificationNumber": ""
+  },
+  "contactDetails": {
+    "phoneNumber": "",
+    "faxNumber": "",
+    "toContact": {
+      "toContactDate": "",
+      "alreadyContacted": false
+    }
+  },
+  "accountConfiguration": {
+    "partnerId": null,
+    "branchUuid": "",
+    "roleUuid": "",
+    "accountManager": {
+      "uuid": "",
+      "email": "",
+      "name": ""
+    },
+    "ibParentTradingAccountUuid": "",
+    "crmUserScope": {
+      "branchScope": [
+        ""
+      ],
+      "managerPools": [
+        ""
+      ]
+    },
+    "accountTypeContact": false
+  },
+  "addressDetails": {
+    "country": "",
+    "state": "",
+    "city": "",
+    "postCode": "",
+    "address": ""
+  },
+  "bankingDetails": {
+    "bankAddress": "",
+    "bankSwiftCode": "",
+    "bankAccount": "",
+    "bankName": "",
+    "accountName": ""
+  },
+  "leadDetails": {
+    "statusUuid": "",
+    "source": "",
+    "providerUuid": "",
+    "becomeActiveClientTime": ""
+  }
+}
+```
 
 #### Header Parameters
 
@@ -1071,6 +1323,28 @@ With the Get Account by UUID endpoint, you can retrieve detailed information abo
 
 With Get Account's Timeline Events endpoint, you can retrieve detailed information about events associated with a specific account. Users can access a timeline of events, including details, creators, and creation timestamps, providing valuable insights into account activities.
 
+### GET /v1/accounts/{accountUuid}/timeline-events?type=VOIP_CALL&from=&to=&sort=
+```sh
+curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/accounts/{accountUuid}/timeline-events?type=VOIP_CALL' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "timelineEvents": [
+    {
+      "details": "New login from IP address 83.15.168.234",
+      "event": "LOGIN",
+      "createdBy": null,
+      "created": "2024-03-26T12:04:44.504Z"
+    }
+  ]
+}
+```
+
 #### Header Parameters
 
 - **Authorization**: `string`
@@ -1115,6 +1389,151 @@ With Get Account's Timeline Events endpoint, you can retrieve detailed informati
 ### Create Account
 
 In this section, you can find the endpoint for creating new Accounts in the system.
+
+### POST /v1/accounts
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/accounts' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "email": "",
+  "password": "",
+  "offerUuid": "",
+  "clientType": "RETAIL",
+  "createAsDepositedAccount": false,
+  "personalDetails": {
+    "firstname": "",
+    "lastname": "",
+    "dateOfBirth": "",
+    "citizenship": "",
+    "language": "",
+    "maritalStatus": "",
+    "passport": {
+      "number": "",
+      "country": ""
+    },
+    "taxIdentificationNumber": ""
+  },
+  "contactDetails": {
+    "phoneNumber": "",
+    "faxNumber": "",
+    "toContact": {
+      "toContactDate": "",
+      "alreadyContacted": false
+    }
+  },
+  "accountConfiguration": {
+    "partnerId": null,
+    "branchUuid": "",
+    "roleUuid": "",
+    "accountManagerUuid": "",
+    "ibParentTradingAccountUuid": "",
+    "crmUserScope": {
+      "branchScope": [
+        ""
+      ],
+      "managerPools": [
+        ""
+      ]
+    },
+    "accountTypeContact": false
+  },
+  "addressDetails": {
+    "country": "",
+    "state": "",
+    "city": "",
+    "postCode": "",
+    "address": ""
+  },
+  "bankingDetails": {
+    "bankAddress": "",
+    "bankSwiftCode": "",
+    "bankAccount": "",
+    "bankName": "",
+    "accountName": ""
+  },
+  "leadDetails": {
+    "statusUuid": "",
+    "source": "",
+    "providerUuid": "",
+    "becomeActiveClientTime": ""
+  }
+}'
+```
+### Response
+`200`
+```json
+{
+  "uuid": "",
+  "oneTimeToken": "",
+  "created": "",
+  "updated": "",
+  "email": "",
+  "verificationStatus": "NEW",
+  "type": "RETAIL",
+  "personalDetails": {
+    "firstname": "",
+    "lastname": "",
+    "dateOfBirth": "",
+    "citizenship": "",
+    "language": "",
+    "maritalStatus": "",
+    "passport": {
+      "number": "",
+      "country": ""
+    },
+    "taxIdentificationNumber": ""
+  },
+  "contactDetails": {
+    "phoneNumber": "",
+    "faxNumber": "",
+    "toContact": {
+      "toContactDate": "",
+      "alreadyContacted": false
+    }
+  },
+  "accountConfiguration": {
+    "partnerId": null,
+    "branchUuid": "",
+    "roleUuid": "",
+    "accountManager": {
+      "uuid": "",
+      "email": "",
+      "name": ""
+    },
+    "ibParentTradingAccountUuid": "",
+    "crmUserScope": {
+      "branchScope": [
+        ""
+      ],
+      "managerPools": [
+        ""
+      ]
+    },
+    "accountTypeContact": false
+  },
+  "addressDetails": {
+    "country": "",
+    "state": "",
+    "city": "",
+    "postCode": "",
+    "address": ""
+  },
+  "bankingDetails": {
+    "bankAddress": "",
+    "bankSwiftCode": "",
+    "bankAccount": "",
+    "bankName": "",
+    "accountName": ""
+  },
+  "leadDetails": {
+    "statusUuid": "",
+    "source": "",
+    "providerUuid": "",
+    "becomeActiveClientTime": ""
+  }
+}
+```
 
 #### Header Parameters
 
@@ -1362,6 +1781,137 @@ In this section, you can find the endpoint for creating new Accounts in the syst
 
 With this endpoint, you can update and modify Account details.
 
+### PATCH /v1/accounts/{accountUuid}
+```sh
+curl --location --globoff --request PATCH 'https://broker-api-demo.match-trader.com/v1/accounts/{accountUuid}' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "verificationStatus": "NEW",
+  "clientType": "RETAIL",
+  "personalDetails": {
+    "firstname": "",
+    "lastname": "",
+    "dateOfBirth": "",
+    "citizenship": "",
+    "language": "",
+    "maritalStatus": "",
+    "passport": {
+      "number": "",
+      "country": ""
+    },
+    "taxIdentificationNumber": ""
+  },
+  "contactDetails": {
+    "phoneNumber": "",
+    "faxNumber": "",
+    "toContact": {
+      "toContactDate": "",
+      "alreadyContacted": false
+    }
+  },
+  "accountConfiguration": {
+    "branchUuid": "",
+    "roleUuid": "",
+    "ibParentTradingAccountUuid": "",
+    "accountManagerUuid": "",
+    "accountTypeContact": false
+  },
+  "addressDetails": {
+    "country": "",
+    "state": "",
+    "city": "",
+    "postCode": "",
+    "address": ""
+  },
+  "bankingDetails": {
+    "bankAddress": "",
+    "bankSwiftCode": "",
+    "bankAccount": "",
+    "bankName": "",
+    "accountName": ""
+  },
+  "leadDetails": {
+    "leadStatusUuid": ""
+  }
+}'
+```
+
+###
+`200`
+```json
+{
+  "uuid": "",
+  "created": "",
+  "updated": "",
+  "email": "",
+  "verificationStatus": "NEW",
+  "type": "RETAIL",
+  "personalDetails": {
+    "firstname": "",
+    "lastname": "",
+    "dateOfBirth": "",
+    "citizenship": "",
+    "language": "",
+    "maritalStatus": "",
+    "passport": {
+      "number": "",
+      "country": ""
+    },
+    "taxIdentificationNumber": ""
+  },
+  "contactDetails": {
+    "phoneNumber": "",
+    "faxNumber": "",
+    "toContact": {
+      "toContactDate": "",
+      "alreadyContacted": false
+    }
+  },
+  "accountConfiguration": {
+    "partnerId": null,
+    "branchUuid": "",
+    "roleUuid": "",
+    "accountManager": {
+      "uuid": "",
+      "email": "",
+      "name": ""
+    },
+    "ibParentTradingAccountUuid": "",
+    "crmUserScope": {
+      "branchScope": [
+        ""
+      ],
+      "managerPools": [
+        ""
+      ]
+    },
+    "accountTypeContact": false
+  },
+  "addressDetails": {
+    "country": "",
+    "state": "",
+    "city": "",
+    "postCode": "",
+    "address": ""
+  },
+  "bankingDetails": {
+    "bankAddress": "",
+    "bankSwiftCode": "",
+    "bankAccount": "",
+    "bankName": "",
+    "accountName": ""
+  },
+  "leadDetails": {
+    "statusUuid": "",
+    "source": "",
+    "providerUuid": "",
+    "becomeActiveClientTime": ""
+  }
+}
+```
+
+
 #### Header Parameters
 
 - **Authorization**: `string`
@@ -1598,6 +2148,23 @@ With this endpoint, you can update and modify Account details.
 
 Using this endpoint, you can change the Account's password.
 
+### POST /v1/change-password
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/change-password' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "accountUuid": "",
+  "newPassword": ""
+}'
+```
+
+### Response
+`204`
+```json
+No content
+```
+
 #### Header Parameters
 
 - **Authorization**: `string`
@@ -1612,3 +2179,1804 @@ Using this endpoint, you can change the Account's password.
 #### Responses
 
 ##### 204 No Content
+
+
+## Trading Accounts
+
+### Get Trading Accounts
+
+With the Get Accounts endpoint, you can retrieve detailed information about all Trading Accounts within the system.
+
+### GET /v1/trading-accounts?query=&page=&size=&sort=&from=&to=
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "content": [
+    {
+      "uuid": "",
+      "login": "",
+      "created": "",
+      "accountInfo": {
+        "uuid": "",
+        "email": ""
+      },
+      "offerUuid": "",
+      "systemUuid": "",
+      "financeInfo": {
+        "balance": null,
+        "equity": null,
+        "profit": null,
+        "netProfit": null,
+        "margin": null,
+        "freeMargin": null,
+        "marginLevel": null,
+        "credit": null,
+        "currency": "",
+        "currencyPrecision": null
+      }
+    }
+  ],
+  "totalPages": null,
+  "totalElements": null,
+  "number": null,
+  "size": null
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **query**: `string`
+  - Filter accounts based on specific criteria.
+- **page**: `integer (int32)`
+  - Page number to access a subset of account records.
+  - **Default value**: `0`
+- **size**: `integer (int32)`
+  - Number of account records per page.
+  - **Default value**: `10`
+- **sort**: `string`
+  - Sorting order of the account records.
+  - **Default value**: `created,desc`
+- **from**: `string (date-time)`
+  - Filter accounts from this starting date and time.
+- **to**: `string (date-time)`
+  - Filter accounts up to this ending date and time.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **content**: `array`
+  - **child attributes**:
+    - **uuid**: `string (uuid)`
+      - Unique identifier for the trading account.
+    - **login**: `string`
+      - Login ID associated with the trading account.
+    - **created**: `string (date-time)`
+      - Date and time the account was established.
+    - **accountInfo**: `object`
+      - **child attributes**:
+        - **uuid**: `string (uuid)`
+          - **REQUIRED**
+          - Unique identifier for the account info.
+        - **email**: `string`
+          - **REQUIRED**
+          - Email address linked to the account.
+        - **offerUuid**: `string (uuid)`
+          - Identifier for the associated offer.
+        - **systemUuid**: `string (uuid)`
+          - Identifier for the system managing the account.
+    - **financeInfo**: `object`
+      - **child attributes**:
+        - **balance**: `number`
+          - Trading Account's Balance.
+        - **equity**: `number`
+          - Trading Account's Equity.
+        - **profit**: `number`
+          - Trading Account's Profit.
+        - **netProfit**: `number`
+          - Trading Account's Net Profit.
+        - **margin**: `number`
+          - Trading Account's Margin.
+        - **freeMargin**: `number`
+          - Trading Account's Free Margin.
+        - **marginLevel**: `number`
+          - Trading Account's Margin Level.
+        - **credit**: `number`
+          - Trading Account's Credit.
+        - **currency**: `string`
+          - Trading Account's Currency.
+        - **currencyPrecision**: `integer (int32)`
+          - Trading Account's Currency precision.
+- **totalPages**: `integer (int32)`
+  - Total number of result pages.
+- **totalElements**: `integer (int64)`
+  - Total number of accounts.
+- **number**: `integer (int32)`
+  - Current page number.
+- **size**: `integer (int32)`
+  - Number of records per page.
+
+### Get Trading Account by login
+
+With the Get Trading Account by login endpoint, you can retrieve detailed information about a particular Trading Account in the system using the Trading Account's login.
+
+### GET /v1/trading-account?systemUuid=ea1fe126-f0e1-4682-8a7d-d7277ebc6e18&login=
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/trading-account?systemUuid=ea1fe126-f0e1-4682-8a7d-d7277ebc6e18&login=' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "uuid": "",
+  "login": "",
+  "created": "",
+  "accountInfo": {
+    "uuid": "",
+    "email": ""
+  },
+  "offerUuid": "",
+  "systemUuid": "",
+  "financeInfo": {
+    "balance": null,
+    "equity": null,
+    "profit": null,
+    "netProfit": null,
+    "margin": null,
+    "freeMargin": null,
+    "marginLevel": null,
+    "credit": null,
+    "currency": "",
+    "currencyPrecision": null
+  }
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - Provided System UUID.
+- **login**: `string`
+  - **REQUIRED**
+  - Trading Account login.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **uuid**: `string (uuid)`
+  - Unique identifier for the trading account.
+- **login**: `string`
+  - Login ID associated with the trading account.
+- **created**: `string (date-time)`
+  - Date and time the account was established.
+- **accountInfo**: `object`
+  - **child attributes**:
+    - **uuid**: `string (uuid)`
+      - Unique identifier for the account info.
+    - **email**: `string`
+      - Email address linked to the account.
+    - **offerUuid**: `string (uuid)`
+      - Identifier for the associated offer.
+    - **systemUuid**: `string (uuid)`
+      - Identifier for the system managing the account.
+- **financeInfo**: `object`
+  - **child attributes**:
+    - **balance**: `number`
+      - Trading Account's Balance.
+    - **equity**: `number`
+      - Trading Account's Equity.
+    - **profit**: `number`
+      - Trading Account's Profit.
+    - **netProfit**: `number`
+      - Trading Account's Net Profit.
+    - **margin**: `number`
+      - Trading Account's Margin.
+    - **freeMargin**: `number`
+      - Trading Account's Free Margin.
+    - **marginLevel**: `number`
+      - Trading Account's Margin Level.
+    - **credit**: `number`
+      - Trading Account's Credit.
+    - **currency**: `string`
+      - Trading Account's Currency.
+    - **currencyPrecision**: `integer (int32)`
+      - Trading Account's Currency precision.
+
+### Create New Trading Account
+
+In this section, you can find the endpoint for creating new Trading Accounts in the system.
+
+### POST /v1/accounts/{accountUuid}/trading-accounts
+```sh
+curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/accounts/{accountUuid}/trading-accounts' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "offerUuid": "",
+  "commissionUuid": ""
+}'
+```
+
+### Response
+`200`
+```json
+{
+  "uuid": "",
+  "created": "",
+  "updated": "",
+  "login": "",
+  "offerUuid": "",
+  "status": "",
+  "commissionUuid": ""
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Path Parameters
+
+- **accountUuid**: `string (uuid)`
+  - **REQUIRED**
+  - A unique identifier for the account under which the trading account will be created.
+
+#### Body Parameters
+
+- **offerUuid**: `string (uuid)`
+  - **REQUIRED**
+  - Identifier for the specific offer that applies to the new trading account.
+- **commissionUuid**: `string (uuid)`
+  - Identifier for the commission structure that will be applied to the trading account.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **uuid**: `string (uuid)`
+  - **REQUIRED**
+  - The unique identifier assigned to the newly created trading account.
+- **created**: `string (date-time)`
+  - **REQUIRED**
+  - Timestamp indicating when the trading account was created.
+- **updated**: `string (date-time)`
+  - **REQUIRED**
+  - Timestamp indicating the last update to the trading account.
+- **login**: `string`
+  - **REQUIRED**
+  - The login ID associated with the trading account.
+- **offerUuid**: `string (uuid)`
+  - **REQUIRED**
+  - The offer identifier linked to the trading account upon creation.
+- **status**: `string`
+  - The status of the trading account upon creation.
+- **commissionUuid**: `string (uuid)`
+  - The commission structure identifier associated with the trading account.
+
+
+## Payments
+
+In the Payments section you can find endpoints for:
+
+- Retrieving Payment Gateways list with details about each Payment Gateway
+- Retrieving Deposits and Withdrawals
+- Making Manual payments
+- Credit in and out
+
+### Get Payment Gateways
+
+A Payment Gateway is a resource responsible for all payment operations in the system. All Deposits and Withdrawals are processed within the frame of a Payment Gateway and following the Payment Gateway configuration.
+
+`Payment Gateways must be assigned to a Branch to be visible to users.`
+
+### GET /v1/payment-gateways?sort=&from=&to=
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/payment-gateways' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response 
+`200`
+```json
+{
+  "paymentGateways": [
+    {
+      "uuid": "",
+      "name": "",
+      "method": "",
+      "supportedOperationTypes": {
+        "deposits": false,
+        "withdrawals": false
+      },
+      "paymentSettings": {
+        "currency": "",
+        "feesConfig": {
+          "processingFee": null,
+          "depositFee": null,
+          "withdrawalFee": null
+        }
+      },
+      "processingSettings": {
+        "autoDeposits": false,
+        "autoWithdrawals": false,
+        "verificationRequired": false
+      }
+    }
+  ]
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **sort**: `string`
+  - Specifies the order in which payment gateway records should be sorted. The default sorting is by creation date in descending order ("created,desc").
+  - **Default value**: `created,desc`
+- **from**: `string (date-time)`
+  - Start date and time for filtering payment gateways based on their creation or update time.
+- **to**: `string (date-time)`
+  - End date and time for the same filtering criteria.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **paymentGateways**: `array`
+  - An array of payment gateway objects,
+  - **child attributes**:
+    - **uuid**: `string (uuid)`
+      - Unique identifier for the payment gateway.
+    - **name**: `string`
+      - Name of the payment gateway.
+    - **method**: `string`
+      - The method used by the payment gateway (e.g., credit card, bank transfer).
+    - **supportedOperationTypes**: `object`
+      - Types of operations supported by the gateway
+      - **child attributes**:
+        - **deposits**: `boolean`
+          - Indicates whether the gateway supports deposits.
+        - **withdrawals**: `boolean`
+          - Indicates whether the gateway supports withdrawals.
+    - **paymentSettings**: `object`
+      - Configuration related to payment settings
+      - **child attributes**:
+        - **currency**: `string`
+          - The currency used by the payment gateway.
+        - **feesConfig**: `object`
+          - Fee configuration for the payment operations:
+          - **child attributes**:
+            - **processingFee**: `number`
+              - General fee for processing payments.
+            - **depositFee**: `number`
+              - Specific fee for deposit operations.
+            - **withdrawalFee**: `number`
+              - Specific fee for withdrawal operations.
+        - **processingSettings**: `object`
+          - Settings related to the processing of transactions
+          - **child attributes**:
+            - **autoDeposits**: `boolean`
+              - Indicates whether deposits are processed automatically.
+            - **autoWithdrawals**: `boolean`
+              - Indicates whether withdrawals are processed automatically.
+            - **verificationRequired**: `boolean`
+              - Specifies if verification is required for processing transactions.
+
+### Get Deposits
+
+With this endpoint, you can retrieve information about deposits made in the system. You can also request deposits for a specific account using query.
+
+### GET /v1/deposits?query=&page=&size=&sort=&from=&to=
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/deposits' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "content": [
+    {
+      "uuid": "",
+      "partnerId": null,
+      "created": "",
+      "accountInfo": {
+        "accountUuid": "",
+        "email": "",
+        "personalDetails": {
+          "firstname": "",
+          "lastname": ""
+        },
+        "accountManager": {
+          "uuid": "",
+          "email": "",
+          "name": ""
+        },
+        "tradingAccount": {
+          "uuid": "",
+          "login": "",
+          "offerUuid": ""
+        },
+        "leadDetails": {
+          "statusUuid": "",
+          "source": "",
+          "providerUuid": "",
+          "becomeActiveClientTime": ""
+        }
+      },
+      "paymentRequestInfo": {
+        "financialDetails": {
+          "status": "",
+          "amount": null,
+          "netAmount": null,
+          "currency": ""
+        },
+        "paymentGatewayDetails": {
+          "uuid": "",
+          "name": ""
+        },
+        "additionalInfo": {
+          "walletAddress": "",
+          "reference": "",
+          "paymentId": ""
+        }
+      }
+    }
+  ],
+  "totalPages": null,
+  "totalElements": null,
+  "number": null,
+  "size": null
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **query**: `string`
+  - Search term to filter the deposits.
+- **page**: `integer (int32)`
+  - Specifies the page number of the deposit list.
+  - **Default value**: `0`
+- **size**: `integer (int32)`
+  - Determines the number of deposit records per page.
+  - **Default value**: `10`
+- **sort**: `string`
+  - Specifies the sorting order of the results, such as by creation date in descending order (created,desc).
+  - **Default value**: `created,desc`
+- **from**: `string (date-time)`
+  - Filters the deposits starting from this date.
+- **to**: `string (date-time)`
+  - Filters the deposits up to this date.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **content**: `array`
+  - Contains the deposit records.
+  - **child attributes**:
+    - **uuid**: `string (uuid)`
+      - Unique identifier for the deposit.
+    - **partnerId**: `integer (int64)`
+      - Identifier of the partner associated with the deposit.
+    - **created**: `string (date-time)`
+      - Date and time when the deposit was created.
+    - **accountInfo**: `object`
+      - Information about the account associated with the deposit, including accountUuid and email.
+      - **child attributes**:
+        - **accountUuid**: `string (uuid)`
+          - Unique identifier for the account.
+        - **email**: `string`
+          - Email address associated with the account.
+    - **personalDetails**: `object`
+      - Personal information of the individual associated with the account.
+      - **child attributes**:
+        - **firstname**: `string`
+          - First name of the account holder.
+        - **lastname**: `string`
+          - Last name of the account holder.
+    - **accountManager**: `object`
+      - Details about the manager overseeing the account.
+      - **child attributes**:
+        - **uuid**: `string (uuid)`
+          - Unique identifier for the account manager.
+        - **email**: `string`
+          - Email address of the account manager.
+        - **name**: `string`
+          - Full name of the account manager.
+    - **tradingAccount**: `object`
+      - Information about the trading account linked to the deposit.
+      - **child attributes**:
+        - **uuid**: `string (uuid)`
+          - Unique identifier for the trading account.
+        - **login**: `string`
+          - Login details for the trading account.
+        - **offerUuid**: `string (uuid)`
+          - Identifier for the offer associated with the trading account.
+    - **leadDetails**: `object`
+      - Details regarding the leads related to the account.
+      - **child attributes**:
+        - **statusUuid**: `string (uuid)`
+          - Unique identifier representing the status of the lead.
+        - **source**: `string`
+          - Source from where the lead was generated.
+        - **providerUuid**: `string (uuid)`
+          - Identifier for the provider related to the lead.
+        - **becomeActiveClientTime**: `string (date-time)`
+          - Timestamp when the lead became an active client.
+    - **paymentRequestInfo**: `object`
+      - Details about payment requests associated with the deposit.
+      - **child attributes**:
+        - **financialDetails**: `object`
+          - Financial specifics of the payment.
+          - **child attributes**:
+            - **status**: `string`
+              - Current status of the payment.
+            - **amount**: `number`
+              - Total amount of the payment.
+            - **netAmount**: `number`
+              - Net amount received after deductions.
+            - **currency**: `string`
+              - Currency in which the payment was made.
+        - **paymentGatewayDetails**: `object`
+          - Information about the payment gateway used.
+          - **child attributes**:
+            - **uuid**: `string (uuid)`
+              - Unique identifier for the payment gateway.
+            - **name**: `string`
+              - Name of the payment gateway.
+        - **additionalInfo**: `object`
+          - Additional details related to the payment.
+          - **child attributes**:
+            - **walletAddress**: `string`
+              - Wallet address used for the payment.
+            - **reference**: `string`
+              - Reference number for the payment.
+            - **paymentId**: `string (uuid)`
+              - Unique identifier for the payment transaction.
+- **totalPages**: `integer (int32)`
+  - Total number of pages available.
+- **totalElements**: `integer (int64)`
+  - Total number of deposit entries available.
+- **number**: `integer (int32)`
+  - Current page number.
+- **size**: `integer (int32)`
+  - Number of records per page.
+
+### Get Withdrawals
+
+With this endpoint, you can retrieve information about withdrawals made in the system. You can also request withdrawals for a specific account using query.
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **query**: `string`
+  - Search term to filter the withdrawal.
+- **page**: `integer (int32)`
+  - Specifies the page number of the withdrawal list.
+  - **Default value**: `0`
+- **size**: `integer (int32)`
+  - Determines the number of withdrawal records per page.
+  - **Default value**: `10`
+- **sort**: `string`
+  - Specifies the sorting order of the results, such as by creation date in descending order (created,desc).
+  - **Default value**: `created,desc`
+- **from**: `string (date-time)`
+  - Filters the withdrawals starting from this date.
+- **to**: `string (date-time)`
+  - Filters the withdrawals up to this date.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **content**: `array`
+  - Contains the withdrawal records.
+  - **child attributes**:
+    - **uuid**: `string (uuid)`
+      - Unique identifier for the withdrawal.
+    - **partnerId**: `integer (int64)`
+      - Identifier of the partner associated with the withdrawal.
+    - **created**: `string (date-time)`
+      - Date and time when the withdrawal was created.
+    - **accountInfo**: `object`
+      - Information about the account associated with the withdrawal, including accountUuid and email.
+      - **child attributes**:
+        - **accountUuid**: `string (uuid)`
+          - Unique identifier for the account.
+        - **email**: `string`
+          - Email address associated with the account.
+    - **personalDetails**: `object`
+      - Personal information of the individual associated with the account.
+      - **child attributes**:
+        - **firstname**: `string`
+          - First name of the account holder.
+        - **lastname**: `string`
+          - Last name of the account holder.
+    - **accountManager**: `object`
+      - Details about the manager overseeing the account.
+      - **child attributes**:
+        - **uuid**: `string (uuid)`
+          - Unique identifier for the account manager.
+        - **email**: `string`
+          - Email address of the account manager.
+        - **name**: `string`
+          - Full name of the account manager.
+    - **tradingAccount**: `object`
+      - Information about the trading account linked to the withdrawal.
+      - **child attributes**:
+        - **uuid**: `string (uuid)`
+          - Unique identifier for the trading account.
+        - **login**: `string`
+          - Login details for the trading account.
+        - **offerUuid**: `string (uuid)`
+          - Identifier for the offer associated with the trading account.
+    - **leadDetails**: `object`
+      - Details regarding the leads related to the account.
+      - **child attributes**:
+        - **statusUuid**: `string (uuid)`
+          - Unique identifier representing the status of the lead.
+        - **source**: `string`
+          - Source from where the lead was generated.
+        - **providerUuid**: `string (uuid)`
+          - Identifier for the provider related to the lead.
+        - **becomeActiveClientTime**: `string (date-time)`
+          - Timestamp when the lead became an active client.
+    - **paymentRequestInfo**: `object`
+      - Details about payment requests associated with the withdrawal.
+      - **child attributes**:
+        - **financialDetails**: `object`
+          - This object outlines the financial specifics of the withdrawal.
+          - **child attributes**:
+            - **status**: `string`
+              - Current status of the withdrawal.
+            - **amount**: `number`
+              - Gross amount of the withdrawal before deductions.
+            - **netAmount**: `number`
+              - Net amount received after any fees or deductions.
+            - **currency**: `string`
+              - Currency type of the withdrawal (e.g., USD, BTC).
+        - **paymentGatewayDetails**: `object`
+          - Information about the payment gateway used.
+          - **child attributes**:
+            - **uuid**: `string (uuid)`
+              - Unique identifier for the payment gateway.
+            - **name**: `string`
+              - Name of the payment gateway.
+        - **additionalInfo**: `object`
+          - This object includes supplementary details about the withdrawal.
+          - **child attributes**:
+            - **walletAddress**: `string`
+              - The digital wallet address for the withdrawal destination.
+            - **reference**: `string`
+              - A reference number for transaction identification.
+            - **paymentId**: `string (uuid)`
+              - Unique identifier for the transaction.
+- **totalPages**: `integer (int32)`
+  - Total number of pages available.
+- **totalElements**: `integer (int64)`
+  - Total number of withdrawal entries available.
+- **number**: `integer (int32)`
+  - Current page number.
+- **size**: `integer (int32)`
+  - Number of records per page.
+
+### Manual Deposit
+
+Using this endpoint, you can deposit funds to a Trading Account.
+
+### POST /v1/deposits/manual?systemUuid=&login=
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/deposits/manual' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "systemUuid": "",
+  "login": "",
+  "paymentGatewayUuid": "",
+  "amount": null,
+  "comment": ""
+}'
+```
+
+### Response
+`200`
+```json
+{
+  "uuid": "",
+  "created": "",
+  "status": "NEW",
+  "transactionInfo": {
+    "amount": null,
+    "netAmount": null,
+    "currency": ""
+  }
+}
+```
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **systemUuid**: `string`
+  - The unique identifier for the system where the deposit is to be made.
+- **login**: `string`
+  - Login details associated with the Trading Account.
+
+#### Body Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique system identifier; this is required.
+- **login**: `string`
+  - **REQUIRED**
+  - The login identifier for the Trading Account; this is required.
+- **paymentGatewayUuid**: `string (uuid)`
+  - **REQUIRED**
+  - Unique identifier for the payment gateway; required for processing the deposit.
+- **amount**: `number`
+  - **REQUIRED**
+  - The amount of money to deposit; required.
+- **comment**: `string`
+  - A comment or note accompanying the deposit.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **uuid**: `string (uuid)`
+  - **REQUIRED**
+  - Unique identifier for the deposit transaction; required.
+- **created**: `string (date-time)`
+  - **REQUIRED**
+  - Timestamp when the deposit was made; required.
+- **status**: `string`
+  - **REQUIRED**
+  - Current status of the deposit.
+  - **Enum values**: NEW, AWAITING_CONFIRMATION, PROCESSING, BOOKED, PROCESSING_PAYMENT, DONE, REJECTED, FAILED, FAILED_PAYMENT, CANCELLED_BY_USER
+- **transactionInfo**: `object`
+  - **child attributes**:
+    - **amount**: `number`
+      - Gross amount deposited.
+    - **netAmount**: `number`
+      - Net amount after processing fees or other deductions.
+    - **currency**: `string`
+      - Currency in which the deposit was made.
+
+### Manual Withdrawal
+
+Using this endpoint, you can withdraw funds from a Trading Account.
+
+### POST /v1/withdrawals/manual
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/withdrawals/manual' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "systemUuid": "",
+  "login": "",
+  "paymentGatewayUuid": "",
+  "amount": null,
+  "comment": ""
+}'
+```
+
+### Response
+`200`
+```json
+{
+  "uuid": "",
+  "created": "",
+  "status": "NEW",
+  "transactionInfo": {
+    "amount": null,
+    "netAmount": null,
+    "currency": ""
+  }
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Body Parameters
+
+- **systemUuid**: `string (uuid)`
+  - **REQUIRED**
+  - The unique identifier for the system from which funds are withdrawn; required.
+- **login**: `string`
+  - **REQUIRED**
+  - Login details for the Trading Account from which the withdrawal is made; required.
+- **paymentGatewayUuid**: `string (uuid)`
+  - **REQUIRED**
+  - Identifier for the payment gateway used for the transaction; required.
+- **amount**: `number`
+  - **REQUIRED**
+  - The amount of money to be withdrawn; required.
+- **comment**: `string`
+  - A comment or note accompanying the withdrawal.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **uuid**: `string (uuid)`
+  - **REQUIRED**
+  - Unique identifier for the withdrawal transaction; required.
+- **created**: `string (date-time)`
+  - **REQUIRED**
+  - Timestamp of when the withdrawal was initiated; required.
+- **status**: `string`
+  - **REQUIRED**
+  - The current status of the withdrawal.
+  - **Enum values**: NEW, AWAITING_CONFIRMATION, PROCESSING, BOOKED, PROCESSING_PAYMENT, DONE, REJECTED, FAILED, FAILED_PAYMENT, CANCELLED_BY_USER
+- **transactionInfo**: `object`
+  - **child attributes**:
+    - **amount**: `number`
+    - **netAmount**: `number`
+    - **currency**: `string`
+
+### Credit In
+
+Using this endpoint, you can add a credit to a Trading Account.
+
+### POST /v1/credit/in
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/credit/in' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "systemUuid": "",
+  "login": "",
+  "amount": null,
+  "comment": ""
+}'
+```
+
+### Response
+`204`
+`No content`
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Body Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique system identifier for the account; required.
+- **login**: `string (uuid)`
+  - **REQUIRED**
+  - The unique login identifier for the Trading Account to which credit is added; required.
+- **amount**: `number`
+  - **REQUIRED**
+  - The amount of credit to be added; required.
+- **comment**: `string`
+  - An optional comment describing the reason for the credit.
+
+#### Responses
+
+##### 204 No Content
+
+### Credit Out
+
+Using this endpoint, you can remove a credit from a Trading Account.
+
+### POST /v1/credit/out
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/credit/out' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "systemUuid": "",
+  "login": "",
+  "amount": null,
+  "comment": ""
+}'
+```
+
+### Response
+`204`
+`No Content`
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Body Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique system identifier for the account; required.
+- **login**: `string (uuid)`
+  - **REQUIRED**
+  - The unique login identifier for the Trading Account from which credit is removed; required.
+- **amount**: `number`
+  - **REQUIRED**
+  - The amount of credit to be removed; required.
+- **comment**: `string`
+  - An optional comment describing the reason for the debit.
+
+#### Responses
+
+##### 204 No Content
+
+
+## Trading
+
+The Trading section allows accessing and managing various trading functionalities within the system. With this section, you can place orders and monitor trading activity seamlessly. This section provides the necessary tools for users to efficiently execute trades and stay informed about market conditions.
+
+### Get Symbols
+
+Using this endpoint, you can retrieve information about various symbols (instruments) within the system, including details such as symbol names, currency, trading hours, and more.
+
+### GET /v1/symbols?systemUuid=&group=
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/symbols?systemUuid=&group=' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "effectiveInstruments": [
+    {
+      "isSessionOpen": false,
+      "symbol": "",
+      "alias": "",
+      "baseCurrency": "",
+      "quoteCurrency": "",
+      "type": "FOREX",
+      "pricePrecision": null,
+      "volumePrecision": null,
+      "swapBuy": null,
+      "swapSell": null,
+      "swapType": "PIPS",
+      "volumeMin": null,
+      "volumeStep": null,
+      "volumeMax": null,
+      "commissionMin": null,
+      "contractSize": null,
+      "sizeOfOnePoint": null,
+      "multiplier": null,
+      "divider": null,
+      "leverage": null,
+      "bidMarkup": null,
+      "askMarkup": null,
+      "freezeLevel": null,
+      "stopsLevel": null,
+      "description": "",
+      "tags": [
+        ""
+      ],
+      "tradingHours": [
+        {
+          "dayNumber": null,
+          "openHours": null,
+          "openMinutes": null,
+          "openSeconds": null,
+          "closeHours": null,
+          "closeMinutes": null,
+          "closeSeconds": null
+        }
+      ],
+      "isFixedLeverage": false,
+      "terminationType": "EXPIRATION",
+      "terminationDate": "",
+      "sessionOpen": false
+    }
+  ]
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **systemUuid**: `string (uuid)`
+  - **REQUIRED**
+  - The unique system identifier; required to specify which system's symbols to retrieve.
+- **group**: `string`
+  - **REQUIRED**
+  - Specifies the group or category of symbols to be fetched; required.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **effectiveInstruments**: `array`
+  - An array of objects, each representing a trading instrument.
+  - **child attributes**:
+    - **isSessionOpen**: `boolean`
+      - Indicates if the trading session for the symbol is currently open.
+    - **symbol**: `string`
+      - The unique identifier of the symbol.
+    - **alias**: `string`
+      - An alternative name or alias for the symbol.
+    - **baseCurrency**: `string`
+      - The base currency of the trading instrument.
+    - **quoteCurrency**: `string`
+      - The currency against which the instrument is valued.
+    - **type**: `string`
+      - The type of the instrument, such as FOREX, CFD.
+      - **Enum values**: FOREX, CFD
+    - **pricePrecision**: `integer (int32)`
+      - The number of decimal places used in the symbol's price.
+    - **volumePrecision**: `integer (int32)`
+      - The precision of volume measurements for the instrument.
+    - **swapBuy**: `number`
+      - The swap rate applied to overnight buy positions.
+    - **swapSell**: `number`
+      - The swap rate applied to overnight sell positions.
+    - **swapType**: `string`
+      - Indicates the type of swap calculation (PIPS, PERCENTS, NOT_DEFINED, UNKNOWN).
+      - **Enum values**: PIPS, PERCENTS, NOT_DEFINED, UNKNOWN
+    - **volumeMin**: `number`
+      - The minimum trade volume for the instrument.
+    - **volumeStep**: `number`
+      - The step increment for trade volume adjustments.
+    - **volumeMax**: `number`
+      - The maximum trade volume for the instrument.
+    - **commissionMin**: `number`
+      - Minimum commission for transactions with this symbol.
+    - **contractSize**: `number`
+      - The size of a single contract for the symbol.
+    - **sizeOfOnePoint**: `number`
+      - Value change of one point movement in price.
+    - **multiplier**: `integer (int64)`
+      - A multiplier applied to the base values for this symbol.
+    - **divider**: `integer (int64)`
+      - A divider applied for calculating precision or other metrics.
+    - **leverage**: `number (double)`
+      - The leverage available for the symbol.
+    - **bidMarkup**: `number`
+      - Additional markup applied to the bid price.
+    - **askMarkup**: `number`
+      - Additional markup applied to the ask price.
+    - **freezeLevel**: `integer (int32)`
+      - The price level within which orders cannot be placed or modified near the current price.
+    - **stopsLevel**: `integer (int32)`
+      - Minimum distance for stop loss and take profit orders from the current price.
+    - **description**: `string`
+      - Descriptive text about the symbol.
+    - **tags**: `array`
+      - Tags or labels associated with the symbol.
+    - **tradingHours**: `array`
+      - Specific trading hours for the symbol.
+      - **child attributes**:
+        - **dayNumber**: `integer (int32)`
+          - An integer representing the day of the week.
+        - **openHours**: `integer (int32)`
+          - The hour at which trading for the symbol opens on the specified day.
+        - **openMinutes**: `integer (int32)`
+          - The minute within the hour at which trading starts.
+        - **openSeconds**: `integer (int32)`
+          - The second within the minute marking the exact moment trading begins.
+        - **closeHours**: `integer (int32)`
+          - The hour at which trading for the symbol closes on the specified day.
+        - **closeMinutes**: `integer (int32)`
+          - The minute within the hour at which trading ends.
+        - **closeSeconds**: `integer (int32)`
+          - The second within the minute marking the exact moment trading stops.
+    - **isFixedLeverage**: `boolean`
+      - Indicates if leverage for the symbol is fixed.
+    - **terminationType**: `string`
+      - Specifies how the symbol's trading is terminated (EXPIRATION, ROLLOVER).
+      - **Enum values**: EXPIRATION, ROLLOVER
+    - **terminationDate**: `string (date-time)`
+      - Date when the symbol is set to expire.
+    - **sessionOpen**: `boolean`
+      - Reflects whether the session for the symbol is open.
+
+### Open Position
+
+Using this endpoint, you can open a Position for a specific Trading Account.
+
+### POST /v1/trading-accounts/positions/open
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/positions/open' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "systemUuid": "",
+  "login": "",
+  "instrument": "",
+  "orderSide": "BUY",
+  "volume": null,
+  "slPrice": null,
+  "tpPrice": null
+}'
+```
+
+### Response
+`200`
+```json
+{
+  "status": "OK",
+  "orderId": ""
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Body Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique identifier for the system where the account is located; required to specify where the position is to be opened.
+- **login**: `string`
+  - **REQUIRED**
+  - The login identifier for the Trading Account on which the position is to be opened; required.
+- **instrument**: `string`
+  - **REQUIRED**
+  - The trading instrument (symbol) for which the position is to be opened; required.
+- **orderSide**: `string`
+  - **REQUIRED**
+  - Specifies whether the position is a 'BUY' or 'SELL'; required.
+  - **Enum values**: BUY, SELL
+- **volume**: `number`
+  - **REQUIRED**
+  - The amount of the instrument to be traded in the position; required.
+- **slPrice**: `number`
+  - The price at which a stop-loss order is set to limit potential losses; optional.
+- **tpPrice**: `number`
+  - The price at which a take-profit order is set to realize profits; optional.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **status**: `string`
+  - **REQUIRED**
+  - The outcome of the request to open a position.
+  - **Enum values**: OK, REJECTED, PARTIAL_SUCCESS
+- **orderId**: `string`
+  - A unique identifier for the order associated with the opened position.
+
+### Edit Position
+
+You can edit (Stop Loss and Take Profit values) an already opened Position for a specific Trading Account using this endpoint.
+
+### POST /v1/trading-accounts/positions/edit
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/positions/edit' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "systemUuid": "",
+  "login": "",
+  "id": "",
+  "slPrice": null,
+  "tpPrice": null
+}'
+```
+
+### Response
+`200`
+```json
+{
+  "status": "OK",
+  "orderId": ""
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Body Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique identifier for the system where the trading account is located; required.
+- **login**: `string`
+  - **REQUIRED**
+  - The login identifier for the Trading Account in which the position exists; required.
+- **id**: `string`
+  - **REQUIRED**
+  - The unique identifier of the position to be edited; required.
+- **slPrice**: `number`
+  - The new stop loss price to limit potential losses; optional, only include if modification is needed.
+- **tpPrice**: `number`
+  - The new take profit price to capture desired profits; optional, only include if modification is needed.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **status**: `string`
+  - Indicates the result of the request to edit the position.
+  - **Enum values**: OK, REJECTED, PARTIAL_SUCCESS
+- **orderId**: `string`
+  - A unique identifier for the order associated with the edited position.
+
+### Close Position
+
+You can close a Position for a specific Trading Account using this endpoint. It is also possible to close multiple positions with one request.
+
+### POST /v1/trading-accounts/positions/close
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/positions/close' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json' \
+--data '{
+  "systemUuid": "",
+  "login": "",
+  "closePositions": [
+    {
+      "positionId": "",
+      "instrument": ""
+    }
+  ]
+}'
+```
+
+### Response
+`200`
+```json
+{
+  "status": "OK",
+  "orderId": ""
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Body Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique identifier for the system where the trading account is located; required to specify the system context.
+- **login**: `string`
+  - **REQUIRED**
+  - The login identifier for the Trading Account from which positions are to be closed; required.
+- **closePositions**: `array`
+  - **REQUIRED**
+  - **child attributes**:
+    - **positionId**: `string`
+      - **REQUIRED**
+      - The unique identifier of the trading position to be closed.
+    - **instrument**: `string`
+      - **REQUIRED**
+      - The trading instrument of the position.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **status**: `string`
+  - The outcome of the request to close positions.
+  - **Enum values**: OK, REJECTED, PARTIAL_SUCCESS
+- **orderId**: `string`
+  - A unique identifier for the transaction or order associated with the closure of the positions.
+
+
+## Trading Data
+
+The Trading Data section includes endpoints to retrieve Open and Closed Positions, Active Orders, and Ledgers. There is also a “Candles” sub-section, where you can find an endpoint to retrieve Candles data for a specific instrument.
+
+### Get Open Positions
+
+With this endpoint, you can retrieve all open positions for a specific trading account.
+
+### GET /v1/trading-accounts/trading-data/open-positions?systemUuid=&login= 
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/trading-data/open-positions?systemUuid=&login=' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "positions": [
+    {
+      "id": "",
+      "symbol": "",
+      "alias": "",
+      "volume": null,
+      "side": "BUY",
+      "openTime": "",
+      "openPrice": null,
+      "stopLoss": null,
+      "takeProfit": null,
+      "swap": null,
+      "profit": null,
+      "netProfit": null,
+      "currentPrice": null,
+      "commission": null,
+      "positions": [
+        {
+          "id": "",
+          "symbol": "",
+          "alias": "",
+          "volume": null,
+          "oldPartialVolume": null,
+          "side": "BUY",
+          "openTime": "",
+          "openPrice": null,
+          "swap": null,
+          "profit": null,
+          "netProfit": null,
+          "currentPrice": null,
+          "commission": null
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique system identifier for the account.
+- **login**: `string`
+  - **REQUIRED**
+  - The login identifier for the Trading Account.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **positions**: `array`
+  - An array of objects, each detailing a trading instrument.
+  - **child attributes**:
+    - **id**: `string`
+      - The unique identifier of the position.
+    - **symbol**: `string`
+      - The trading instrument of the position.
+    - **alias**: `string`
+      - An alternative name or alias for the trading instrument.
+    - **volume**: `number`
+      - The amount of the instrument that is currently open.
+    - **side**: `string`
+      - Indicates whether the position is a 'BUY' or 'SELL'.
+      - **Enum values**: BUY, SELL
+    - **openTime**: `string (date-time)`
+      - The timestamp when the position was opened.
+    - **openPrice**: `number`
+      - The price at which the position was opened.
+    - **stopLoss**: `number`
+      - The set stop loss value to limit potential losses.
+    - **takeProfit**: `number`
+      - The set take profit value to secure profits.
+    - **swap**: `number`
+      - The swap fee applied to the position.
+    - **profit**: `number`
+      - The current profit or loss of the position.
+    - **netProfit**: `number`
+      - The net profit after accounting for fees and costs.
+    - **currentPrice**: `number`
+      - The current market price of the trading instrument.
+    - **commission**: `number`
+      - The commission fees associated with the position.
+    - **positions**: `array`
+      - **child attributes**:
+        - **id**: `string`
+          - The unique identifier of the position.
+        - **symbol**: `string`
+          - The trading instrument of the position.
+        - **alias**: `string`
+          - An alternative name or alias for the trading instrument.
+        - **volume**: `number`
+          - The amount of the instrument that is currently open.
+        - **oldPartialVolume**: `number`
+          - The volume of the instrument in the position before any recent adjustments or partial closures.
+        - **side**: `string`
+          - Indicates whether the position is a 'BUY' or 'SELL'.
+          - **Enum values**: BUY, SELL
+        - **openTime**: `string (date-time)`
+          - The timestamp when the position was opened.
+        - **openPrice**: `number`
+          - The price at which the position was opened.
+        - **swap**: `number`
+          - The swap fee applied to the position.
+        - **profit**: `number`
+          - The current profit or loss of the position.
+        - **netProfit**: `number`
+          - The net profit after accounting for fees and costs.
+        - **currentPrice**: `number`
+          - The current market price of the trading instrument.
+        - **commission**: `number`
+          - The commission fees associated with the position.
+
+### Get Closed Positions
+
+With this endpoint, you can retrieve all closed positions for a specific trading account.
+
+### GET /v1/trading-accounts/trading-data/closed-positions?systemUuid=&login=&from=&to= 
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/trading-data/closed-positions?systemUuid=&login=' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "closedPositions": [
+    {
+      "id": "",
+      "openTime": "",
+      "openPrice": null,
+      "symbol": "",
+      "alias": "",
+      "volume": null,
+      "stopLoss": null,
+      "takeProfit": null,
+      "time": "",
+      "closePrice": null,
+      "commission": null,
+      "swap": null,
+      "profit": null,
+      "side": "BUY",
+      "netProfit": null,
+      "closingOrderID": ""
+    }
+  ]
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique identifier for the system associated with the trading account; required.
+- **login**: `string`
+  - **REQUIRED**
+  - The login identifier for the Trading Account; required.
+- **from**: `string`
+  - Start date for the query range to fetch closed positions; optional.
+- **to**: `string`
+  - End date for the query range to fetch closed positions; optional.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **closedPositions**: `array`
+  - **child attributes**:
+    - **id**: `string`
+      - Unique identifier of the closed position.
+    - **openTime**: `string (date-time)`
+      - Timestamp when the position was opened.
+    - **openPrice**: `number`
+      - Price at which the position was opened.
+    - **symbol**: `string`
+      - Trading instrument of the position.
+    - **alias**: `string`
+      - Alternative name or alias for the trading instrument.
+    - **volume**: `number`
+      - Volume of the instrument traded in the position.
+    - **stopLoss**: `number`
+      - Stop loss value set for the position.
+    - **takeProfit**: `number`
+      - Take profit value set for the position.
+    - **time**: `string (date-time)`
+      - Timestamp when the position was closed.
+    - **closePrice**: `number`
+      - Price at which the position was closed.
+    - **commission**: `number`
+      - Commission fees associated with the position.
+    - **swap**: `number`
+      - Swap fees incurred by the position.
+    - **profit**: `number`
+      - Profit or loss generated by the position.
+    - **side**: `string`
+      - Indicates whether the position was a 'BUY' or 'SELL'.
+      - **Enum values**: BUY, SELL
+    - **netProfit**: `number`
+      - Net profit or loss after accounting for fees and costs.
+    - **closingOrderID**: `string`
+      - Identifier for the order that closed the position.
+
+### Get Active Orders
+
+With this endpoint, you can retrieve all Active Orders for a specific Trading Account.
+
+### GET /v1/trading-accounts/trading-data/active-orders?systemUuid=&login= 
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/trading-accounts/trading-data/active-orders?systemUuid=&login=' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "orders": [
+    {
+      "id": "",
+      "symbol": "",
+      "alias": "",
+      "volume": null,
+      "type": "LIMIT",
+      "creationTime": "",
+      "activationPrice": null,
+      "side": "BUY",
+      "stopLoss": null,
+      "takeProfit": null,
+      "comment": ""
+    }
+  ]
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **systemUuid**: `string`
+  - **REQUIRED**
+  - The unique system identifier for the account; required to specify the system from which to retrieve active orders.
+- **login**: `string`
+  - **REQUIRED**
+  - The login identifier for the Trading Account; required to identify which account's orders are to be fetched.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **orders**: `array`
+  - An array of objects, each detailing an active order.
+  - **child attributes**:
+    - **id**: `string`
+      - Unique identifier for the order.
+    - **symbol**: `string`
+      - Trading instrument of the order.
+    - **alias**: `string`
+      - An alternative name or alias for the trading instrument.
+    - **volume**: `number`
+      - Volume of the instrument ordered.
+    - **type**: `string`
+      - Type of order, with possible values being 'LIMIT', 'STOP', or 'UNTYPE'.
+      - **Enum values**: LIMIT, STOP, UNTYPE
+    - **creationTime**: `string (date-time)`
+      - Timestamp marking when the order was created.
+    - **activationPrice**: `number`
+      - Price at which the order becomes active.
+    - **side**: `string`
+      - Specifies whether the order is to 'BUY' or 'SELL'.
+      - **Enum values**: BUY, SELL
+    - **stopLoss**: `number`
+      - The stop loss price set for the order to limit potential losses.
+    - **takeProfit**: `number`
+      - The take profit price set for the order to secure profits.
+    - **comment**: `string`
+      - A comment or note associated with the order.
+
+### Get Ledgers
+
+With this endpoint, you can retrieve all Ledgers for a specific Trading Account.
+
+### GET /v1/trading-accounts/trading-data/ledgers?systemUuid=&login=&types=&from=&to=&limit= 
+```sh
+curl --location --globoff 'https://broker-api-demo.match-trader.com/v1/trading-accounts/trading-data/ledgers?systemUuid=&login=&types[]=' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "operations": [
+    {
+      "id": "",
+      "type": "DEPOSIT",
+      "time": "",
+      "profit": null,
+      "comment": ""
+    }
+  ]
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **systemUuid**: `string (date-time)`
+  - **REQUIRED**
+  - The unique system identifier for the account; required to specify from which system the ledgers are retrieved.
+- **login**: `string (date-time)`
+  - **REQUIRED**
+  - The login identifier for the Trading Account; required to identify the account whose ledger entries are to be fetched.
+- **types**: `array`
+  - **REQUIRED**
+  - **Enum values**: DEPOSIT, WITHDRAWAL, CREDIT_IN, CREDIT_OUT, AGENT_COMMISSION, COMMISSIONS, SWAPS
+- **from**: `string`
+  - Start date for filtering the ledger entries; optional.
+- **to**: `string`
+  - End date for filtering the ledger entries; optional.
+- **limit**: `integer`
+  - The maximum number of ledger entries to return in the response; optional.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **operations**: `array`
+  - An array of objects, each representing a ledger entry.
+  - **child attributes**:
+    - **id**: `string`
+      - Unique identifier for the ledger entry.
+    - **type**: `string`
+      - The type of transaction recorded in the ledger.
+      - **Enum values**: DEPOSIT, WITHDRAWAL, CREDIT_IN, CREDIT_OUT, AGENT_COMMISSION, COMMISSIONS, SWAPS, OTHER
+    - **time**: `string (date-time)`
+      - Timestamp when the transaction was recorded.
+    - **profit**: `number`
+      - Profit or loss amount associated with the transaction.
+    - **comment**: `string`
+      - A comment or description provided for the transaction.
+
+### Get Candles
+
+Get Candles endpoint allows you to retrieve candle data for a specific symbol and time interval. You will access information on the opening, high, low, and closing prices of candles within the specified time frame.
+
+### GET /v1/candles?systemUuid=&symbol=&interval=M5&from=&to= 
+```sh
+curl --location 'https://broker-api-demo.match-trader.com/v1/candles?systemUuid=&symbol=&interval=M5&from=&to=' \
+--header 'Authorization: Provide you token here' \
+--header 'Content-Type: application/json'
+```
+
+### Response
+`200`
+```json
+{
+  "symbol": "",
+  "interval": "M1",
+  "candles": [
+    {
+      "time": null,
+      "open": null,
+      "high": null,
+      "low": null,
+      "close": null
+    }
+  ]
+}
+```
+
+#### Header Parameters
+
+- **Authorization**: `string`
+
+#### Query Parameters
+
+- **systemUuid**: `string (uuid)`
+  - **REQUIRED**
+  - The unique system identifier; required to specify which trading system's symbol data to retrieve.
+- **symbol**: `string`
+  - **REQUIRED**
+  - The trading symbol for which candle data is requested; required.
+- **interval**: `string`
+  - **REQUIRED**
+  - The time interval for the candle data.
+  - **Enum values**: M1, M5, M15, M30, H1, H4, D1, W1, MN1
+- **from**: `string (date-time)`
+  - **REQUIRED**
+  - The start datetime from which to retrieve candle data; required.
+- **to**: `string (date-time)`
+  - **REQUIRED**
+  - The end datetime up to which candle data should be retrieved; required.
+
+#### Responses
+
+##### 200 OK
+
+**Response Attributes:**
+
+- **symbol**: `string`
+  - The symbol for which the data is provided.
+- **interval**: `string`
+  - The time interval of the candle data, reflecting the same values as specified in the query.
+  - **Enum values**: M1, M5, M15, M30, H1, H4, D1, W1, MN1
+- **candles**: `array`
+  - An array of objects, each representing a candle.
+  - **child attributes**:
+    - **time**: `integer (int64)`
+      - Timestamp representing the start time of the candle.
+    - **open**: `number (double)`
+      - Opening price of the candle.
+    - **high**: `number (double)`
+      - Highest price reached during the candle's interval.
+    - **low**: `number (double)`
+      - Lowest price during the candle's interval.
+    - **close**: `number (double)`
+      - Closing price of the candle.
+
