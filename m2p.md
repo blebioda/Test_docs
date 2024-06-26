@@ -311,48 +311,37 @@ curl --location 'https://pp-staging.fx-edge.com/api/v2/withdraw/crypto_agent' \
   - The transaction is done. The funds are booked
 
 ### Header Parameters
-- **Content-Type**
-  - string
+- **Content-Type** `string`
 
 ### Body Parameters
-- **address**
-  - string
+- **address** `string`
   - User cryptocurrency wallet address to withdraw
 
-- **amount**
-  - integer
+- **amount** `integer`
   - The amount the client wants to withdraw in the currency
 
-- **apiToken**
-  - string
+- **apiToken** `string`
   - API token provided by Support
 
-- **callbackUrl**
-  - string
+- **callbackUrl** `string`
   - Notification about changes in payment status will be sent to this URL
 
-- **currency**
-  - string
+- **currency** `string`
   - Symbol of currency converted to withdrawCurrency (not full name), e.g. USD
 
-- **paymentGatewayName**
-  - string
+- **paymentGatewayName** `string`
   - Name of payment gateway that will be used for withdrawal
 
-- **signature**
-  - string
+- **signature** `string`
   - The signature generated from the request body and API secret
 
-- **timestamp**
-  - integer
+- **timestamp** `integer`
   - Current time in seconds
 
-- **withdrawCurrency**
-  - string
+- **withdrawCurrency** `string`
   - Cryptocurrency to which currency is converted
 
-- **tradingAccountLogin**
-  - string
+- **tradingAccountLogin** `string`
   - Optional - Trading account ID of a user requesting a withdrawal or any other information that will help you identify transaction
 
 ### Responses
@@ -360,44 +349,32 @@ curl --location 'https://pp-staging.fx-edge.com/api/v2/withdraw/crypto_agent' \
 - **Object**
 
 ### Response Attributes
-- **errorList**
-  - array
+- **errorList**: `array`
 
-- **finalAmount**
-  - number
+- **finalAmount** `number`
 
-- **paymentId**
-  - string
+- **paymentId**: `string`
   - Payment Id which helps you find this transaction in the m2p dashboard
 
-- **status**
-  - string
+- **status**: `string`
   - Status of the transaction on the moment of sending request
 
-- **transactionAmount**
-  - number
+- **transactionAmount** `number`
 
-- **netAmount**
-  - number
+- **netAmount** `number`
 
-- **transactionCurrency**
-  - string
+- **transactionCurrency** `string`
 
-- **finalCurrency**
-  - string
+- **finalCurrency** `string`
 
-- **processingFee**
-  - string
+- **processingFee** `string`
 
-- **convertRatio**
-  - number
+- **convertRatio** `number`
 
-- **address**
-  - string
+- **address** `string`
   - Address on which funds has been sent
 
-- **tempTransactionId**
-  - string
+- **tempTransactionId** `string`
 
 # Cryptocurrency Details
 
@@ -547,22 +524,22 @@ You have to add `.00000000` to the amount. The beginning of the string should lo
 
 ### Example
 
-- **depositAddress**: string
-- **cryptoTransactionInfo**: array
+- **depositAddress**: `string`
+- **cryptoTransactionInfo**: `array`
   - **child attributes**
-    - **txid**: string
-    - **confirmations**: number
-    - **amount**: number
-    - **confirmedTime**: string
-    - **status**: string
-    - **processingFee**: number
-    - **conversionRate**: number
-- **paymentId**: string
-- **status**: string
-- **transactionAmount**: number
-- **netAmount**: number
-- **transactionCurrency**: string
-- **processingFee**: number
-- **finalAmount**: number
-- **finalCurrency**: string
-- **conversionRate**: number
+    - **txid**: `string`
+    - **confirmations**: `number`
+    - **amount**: `number`
+    - **confirmedTime**: `string`
+    - **status**: `string`
+    - **processingFee**: `number`
+    - **conversionRate**: `number`
+- **paymentId**: `string`
+- **status**: `string`
+- **transactionAmount**: `number`
+- **netAmount**: `number`
+- **transactionCurrency**: `string`
+- **processingFee**: `number`
+- **finalAmount**: `number`
+- **finalCurrency**: `string`
+- **conversionRate**: `number`
